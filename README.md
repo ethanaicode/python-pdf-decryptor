@@ -4,7 +4,7 @@
 
 The **PDF Decryption Tool** is a lightweight utility designed to remove passwords from PDF files. Written in Python, it supports **Windows, Linux, and macOS** (a Python runtime environment is required).
 
-![软件界面预览](./.pics/preview.png)
+![Software Preview](./.pics/preview.png)
 
 [中文版介绍](README-ZH.md)
 
