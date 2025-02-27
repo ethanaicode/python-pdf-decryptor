@@ -1,22 +1,24 @@
-# PDF 解密工具
+# PDF Decryption Tool
 
-## 介绍
+## Introduction
 
-PDF 解密工具，支持解密 PDF 文件的密码，Python 编写，支持 Windows、Linux、macOS（需要自己准备运行环境）。
+The **PDF Decryption Tool** is a lightweight utility designed to remove passwords from PDF files. Written in Python, it supports **Windows, Linux, and macOS** (a Python runtime environment is required).
 
-![软件界面预览](./.pics/preview.jpg)
+![软件界面预览](./.pics/preview.png)
 
-## 使用方法
+[中文版介绍](README-ZH.md)
 
-1. 安装 Python 运行环境（Python 3.6+）；
+## How to Use
 
-2. 安装依赖库：
+1. Install Python (Version **3.6+**).
+
+2. Install the required dependencies:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-3. 运行程序：
+3. Run the program:
 
    ```bash
    python main.py

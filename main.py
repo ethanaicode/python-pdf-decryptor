@@ -8,26 +8,26 @@ class PDFDecryptor(QWidget):
         self.initUI()
         
     def initUI(self):
-        self.setWindowTitle('PDF解密工具')
+        self.setWindowTitle('PDF解密工具 / PDF Decryption Tool')
         self.setGeometry(100, 100, 600, 400)
         
         layout = QVBoxLayout()
         
-        self.file_label = QLabel('选择加密的PDF文件:')
+        self.file_label = QLabel('选择加密的PDF文件: / Select an encrypted PDF file:')
         layout.addWidget(self.file_label)
         
-        self.file_button = QPushButton('选择文件')
+        self.file_button = QPushButton('选择文件 / Select File')
         self.file_button.clicked.connect(self.select_file)
         layout.addWidget(self.file_button)
         
-        self.output_label = QLabel('选择解密后的PDF文件保存路径:')
+        self.output_label = QLabel('选择解密后的PDF文件保存路径: / Choose output folder for decrypted PDF:')
         layout.addWidget(self.output_label)
         
-        self.output_button = QPushButton('选择路径')
+        self.output_button = QPushButton('选择路径 / Select Path')
         self.output_button.clicked.connect(self.select_output_path)
         layout.addWidget(self.output_button)
         
-        self.decrypt_button = QPushButton('开始解密')
+        self.decrypt_button = QPushButton('开始解密 / Start Decryption')
         self.decrypt_button.clicked.connect(self.decrypt_pdf)
         layout.addWidget(self.decrypt_button)
         
@@ -39,17 +39,17 @@ class PDFDecryptor(QWidget):
 
     def select_file(self):
         options = QFileDialog.Options()
-        file_path, _ = QFileDialog.getOpenFileName(self, "选择加密的PDF文件", "", "PDF Files (*.pdf)", options=options)
+        file_path, _ = QFileDialog.getOpenFileName(self, "选择加密的PDF文件 / Select an Encrypted PDF File", "", "PDF Files (*.pdf)", options=options)
         if file_path:
             self.file_path = file_path
-            self.log.append(f'选择的文件: {file_path}')
+            self.log.append(f'选择的文件: {file_path} / Selected File: {file_path}')
 
     def select_output_path(self):
         options = QFileDialog.Options()
-        folder_path = QFileDialog.getExistingDirectory(self, "选择解密后的PDF文件保存路径", options=options)
+        folder_path = QFileDialog.getExistingDirectory(self, "选择解密后的PDF文件保存路径 / Select Output Folder for Decrypted PDF", options=options)
         if folder_path:
             self.output_path = folder_path
-            self.log.append(f'保存路径: {folder_path}')
+            self.log.append(f'保存路径: {folder_path} / Save Path: {folder_path}')
 
     def decrypt_pdf(self):
         if hasattr(self, 'file_path'):
@@ -60,27 +60,27 @@ class PDFDecryptor(QWidget):
             else:
                 output_path = f"{self.output_path}/{input_path.split('/')[-1].split('.')[0]}_decrypted.pdf"
             
-            self.log.append('正在解密...')
+            self.log.append('正在解密... / Decrypting...')
             pdf_reader = self.load_pdf(input_path)
             if pdf_reader is None:
-                self.log.append("未能读取内容")
+                self.log.append("未能读取内容 / Failed to read content")
             elif not pdf_reader.is_encrypted:
-                self.log.append('文件未加密，无需操作')
+                self.log.append('文件未加密，无需操作 / File is not encrypted, no action needed')
             else:
                 pdf_writer = PdfWriter()
                 pdf_writer.append_pages_from_reader(pdf_reader)
                 
                 with open(output_path, 'wb') as output_file:
                     pdf_writer.write(output_file)
-                self.log.append(f"解密文件已生成: {output_path}")
+                self.log.append(f"解密文件已生成: {output_path} / Decrypted file saved: {output_path}")
         else:
-            self.log.append("请先选择PDF文件")
+            self.log.append("请先选择PDF文件 / Please select a PDF file first")
     
     def load_pdf(self, file_path):
         try:
             pdf_file = open(file_path, 'rb')
         except Exception as error:
-            self.log.append('无法打开文件: ' + str(error))
+            self.log.append('无法打开文件: ' + str(error) + ' / Unable to open file: ' + str(error))
             return None
 
         reader = PdfReader(pdf_file, strict=False)
@@ -89,7 +89,7 @@ class PDFDecryptor(QWidget):
             try:
                 reader.decrypt('')
             except Exception as error:
-                self.log.append('无法解密文件: ' + str(error))
+                self.log.append('无法解密文件: ' + str(error) + ' / Unable to decrypt file: ' + str(error))
                 return None
         return reader
 
